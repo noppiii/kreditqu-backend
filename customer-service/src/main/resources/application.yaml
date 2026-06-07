@@ -1,0 +1,15 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: customer-service
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    include: common
+
+logging:
+  level:
+    com.creditqu.customer_service: DEBUG

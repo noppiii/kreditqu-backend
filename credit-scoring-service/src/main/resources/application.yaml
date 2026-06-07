@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: credit-scoring-service
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    include: common
+
+server:
+  port: 8095

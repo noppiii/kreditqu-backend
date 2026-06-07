@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: account-card-service
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    include: common
+
+server:
+  port: 8091

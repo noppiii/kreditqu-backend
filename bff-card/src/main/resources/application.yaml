@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: bff-card
+  profiles:
+    include: common
+server:
+  port: 8081

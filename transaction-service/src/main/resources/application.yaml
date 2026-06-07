@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: transaction-service
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    include: common
+
+server:
+  port: 8093

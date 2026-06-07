@@ -1,0 +1,15 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: application-service
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    include: common
+
+logging:
+  level:
+    com.creditqu.application_service: DEBUG

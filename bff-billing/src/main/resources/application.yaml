@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: bff-billing
+  profiles:
+    include: common
+server:
+  port: 8082
