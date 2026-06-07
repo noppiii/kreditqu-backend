@@ -7,6 +7,7 @@ import com.creditqu.application_service.entity.Application;
 import com.creditqu.application_service.entity.ApplicationStatusHistory;
 import com.creditqu.application_service.repository.ApplicationRepository;
 import com.creditqu.application_service.repository.ApplicationStatusHistoryRepository;
+import com.creditqu.application_service.service.ApplicationScoringService;
 import com.creditqu.application_service.service.ApplicationService;
 import com.creditqu.application_service.util.ApplicationNumberGenerator;
 import com.creditqu.common_module.constant.ApplicationStatus;
@@ -27,6 +28,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final ApplicationStatusHistoryRepository historyRepository;
     private final ApplicationNumberGenerator numberGenerator;
+    private final ApplicationScoringService applicationScoringService;
 
     @Override
     @Transactional
@@ -60,6 +62,18 @@ public class ApplicationServiceImpl implements ApplicationService {
         log.info("Application saved with number: {}", savedApplication.getApplicationNumber());
 
         saveStatusHistory(savedApplication, null, ApplicationStatus.SUBMITTED.name(), "Initial submission");
+
+        Integer age = calculateAge(request.getCustomerId());
+
+        applicationScoringService.processScoring(
+                savedApplication.getId(),
+                request.getCustomerId(),
+                request.getMonthlyIncome(),
+                request.getTenureYears(),
+                request.getEmploymentType(),
+                null,
+                age
+        );
 
         return mapToResponseDTO(savedApplication);
     }
@@ -159,5 +173,9 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .rejectedAt(application.getRejectedAt())
                 .createdAt(application.getCreatedAt())
                 .build();
+    }
+
+    private Integer calculateAge(Long customerId) {
+        return 30;
     }
 }

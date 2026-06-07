@@ -15,4 +15,6 @@ public interface NotificationService {
     NotificationResponseDTO sendTransactionNotification(Long userId, String recipient, String amount, String merchant);
     List<NotificationResponseDTO> getUserNotifications(Long userId, int page, int size);
     void markAsRead(Long notificationId);
+    NotificationResponseDTO sendRejectionEmail(String email, String name, String reason);
+    NotificationResponseDTO sendManualReviewEmail(String email, String name, String applicationNumber);
 }

@@ -23,6 +23,9 @@ public class ScoringRule {
     @Column(name = "rule_name", nullable = false, length = 100)
     private String ruleName;
 
+    @Column(name = "rule_category", nullable = false, length = 50)
+    private String ruleCategory;
+
     @Column(name = "min_income", precision = 15, scale = 2)
     private BigDecimal minIncome;
 
@@ -38,6 +41,12 @@ public class ScoringRule {
     @Column(name = "min_tenure")
     private Integer minTenure;
 
+    @Column(name = "max_tenure")
+    private Integer maxTenure;
+
+    @Column(name = "employment_type", length = 30)
+    private String employmentType;
+
     @Column(name = "score_point", nullable = false)
     private Integer scorePoint;
 
@@ -46,4 +55,7 @@ public class ScoringRule {
 
     @Column(name = "is_active")
     private Boolean isActive = true;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 }

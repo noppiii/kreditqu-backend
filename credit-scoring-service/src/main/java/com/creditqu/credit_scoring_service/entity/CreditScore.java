@@ -1,7 +1,7 @@
 package com.creditqu.credit_scoring_service.entity;
 
-import com.creditqu.common_module.constant.ApprovalRecommendation;
-import com.creditqu.common_module.constant.ScoreRating;
+import com.creditqu.credit_scoring_service.constant.ApprovalRecommendation;
+import com.creditqu.credit_scoring_service.constant.ScoreRating;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +27,9 @@ public class CreditScore {
 
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
+
+    @Column(name = "application_id")
+    private Long applicationId;
 
     @Column(name = "score_value", nullable = false)
     private Integer scoreValue;

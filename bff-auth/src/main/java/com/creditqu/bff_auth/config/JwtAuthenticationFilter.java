@@ -37,7 +37,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwt;
         final String userEmail;
 
-        // Skip filter untuk endpoint public
         String path = request.getServletPath();
         if (path.equals("/api/auth/register") || path.equals("/api/auth/login")) {
             filterChain.doFilter(request, response);

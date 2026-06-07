@@ -60,7 +60,6 @@ public class CardProductServiceImpl implements CardProductService {
         BigDecimal suggestedLimit = BigDecimal.ZERO;
 
         if (eligible) {
-            // Calculate suggested limit based on income and product max limit
             suggestedLimit = request.getMonthlyIncome().multiply(BigDecimal.valueOf(3));
             if (suggestedLimit.compareTo(product.getMaxLimit()) > 0) {
                 suggestedLimit = product.getMaxLimit();

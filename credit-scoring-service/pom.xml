@@ -12,11 +12,13 @@
 
     <artifactId>credit-scoring-service</artifactId>
     <name>Credit Scoring Service</name>
+    <description>Credit scoring and eligibility calculation service</description>
 
     <dependencies>
         <dependency>
             <groupId>com.creditqu</groupId>
             <artifactId>common-module</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

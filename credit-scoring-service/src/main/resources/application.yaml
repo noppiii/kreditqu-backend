@@ -1,3 +1,6 @@
+server:
+  port: 8095
+
 spring:
   application:
     name: credit-scoring-service
@@ -7,5 +10,22 @@ spring:
   profiles:
     include: common
 
-server:
-  port: 8095
+scoring:
+  external:
+    bureau:
+      enabled: ${EXTERNAL_BUREAU_ENABLED:false}
+      mock: true
+      url: ${SLIK_OJK_URL:https://api.ojk.go.id/v1/credit-check}
+      timeout: 5000
+
+  rules:
+    min-income-score: 100
+    max-income-score: 300
+    min-age-score: 50
+    max-age-score: 150
+    min-tenure-score: 50
+    max-tenure-score: 100
+
+logging:
+  level:
+    com.creditqu.credit_scoring_service: DEBUG

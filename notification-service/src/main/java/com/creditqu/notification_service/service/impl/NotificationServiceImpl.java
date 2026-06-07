@@ -238,6 +238,57 @@ public class NotificationServiceImpl implements NotificationService {
         log.info("Notification {} marked as read", notificationId);
     }
 
+    @Override
+    @Transactional
+    public NotificationResponseDTO sendRejectionEmail(String email, String name, String reason) {
+        String subject = "Pengajuan Kartu Kredit Anda";
+        String content = String.format(
+                "Halo %s,\n\n" +
+                        "Mohon maaf, pengajuan kartu kredit Anda belum dapat disetujui pada saat ini.\n\n" +
+                        "Alasan: %s\n\n" +
+                        "Anda dapat mengajukan kembali setelah 3 bulan.\n\n" +
+                        "Terima kasih atas minat Anda.\n\n" +
+                        "Salam,\nTim KreditQu",
+                name, reason
+        );
+
+        NotificationRequestDTO request = NotificationRequestDTO.builder()
+                .userId(0L)
+                .recipient(email)
+                .channel("REJECTION")
+                .title(subject)
+                .content(content)
+                .type(NotificationType.EMAIL)
+                .build();
+
+        return sendNotification(request);
+    }
+
+    @Override
+    @Transactional
+    public NotificationResponseDTO sendManualReviewEmail(String email, String name, String applicationNumber) {
+        String subject = "Pengajuan Kartu Kredit Memerlukan Verifikasi";
+        String content = String.format(
+                "Halo %s,\n\n" +
+                        "Pengajuan kartu kredit Anda dengan nomor %s sedang dalam proses verifikasi manual.\n\n" +
+                        "Kami akan menginformasikan hasilnya dalam 3-5 hari kerja.\n\n" +
+                        "Terima kasih atas kesabaran Anda.\n\n" +
+                        "Salam,\nTim KreditQu",
+                name, applicationNumber
+        );
+
+        NotificationRequestDTO request = NotificationRequestDTO.builder()
+                .userId(0L)
+                .recipient(email)
+                .channel("MANUAL_REVIEW")
+                .title(subject)
+                .content(content)
+                .type(NotificationType.EMAIL)
+                .build();
+
+        return sendNotification(request);
+    }
+
     private NotificationResponseDTO mapToResponseDTO(Notification notification) {
         return NotificationResponseDTO.builder()
                 .id(notification.getId())
