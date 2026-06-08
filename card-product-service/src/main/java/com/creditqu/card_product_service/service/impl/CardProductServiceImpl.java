@@ -61,17 +61,22 @@ public class CardProductServiceImpl implements CardProductService {
 
         if (eligible) {
             suggestedLimit = request.getMonthlyIncome().multiply(BigDecimal.valueOf(3));
+
             if (suggestedLimit.compareTo(product.getMaxLimit()) > 0) {
                 suggestedLimit = product.getMaxLimit();
             }
+
             if (suggestedLimit.compareTo(product.getDefaultLimit()) < 0) {
                 suggestedLimit = product.getDefaultLimit();
             }
-            message = "Anda memenuhi syarat untuk " + product.getProductName();
+
+            message = "You are eligible for " + product.getProductName();
         } else if (!incomeEligible) {
-            message = "Penghasilan Anda belum memenuhi syarat minimal untuk produk " + product.getProductName();
+            message = "Your income does not meet the minimum requirement for the "
+                    + product.getProductName() + " product.";
         } else {
-            message = "Skor kredit Anda belum memenuhi syarat untuk produk " + product.getProductName();
+            message = "Your credit score does not meet the minimum requirement for the "
+                    + product.getProductName() + " product.";
         }
 
         return EligibilityResponseDTO.builder()
