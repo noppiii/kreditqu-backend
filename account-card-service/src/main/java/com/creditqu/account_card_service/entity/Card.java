@@ -45,6 +45,7 @@ public class Card {
     private String pinHash;
 
     @Column(name = "is_primary")
+    @Builder.Default
     private Boolean isPrimary = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +54,11 @@ public class Card {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private CardStatus status = CardStatus.INACTIVE;
+
+    @Column(name = "issued_by", length = 50)
+    private String issuedBy;
 
     @CreationTimestamp
     @Column(name = "issued_at", updatable = false)

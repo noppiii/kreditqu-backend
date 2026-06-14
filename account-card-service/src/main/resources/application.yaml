@@ -1,3 +1,6 @@
+server:
+  port: 8091
+
 spring:
   application:
     name: account-card-service
@@ -7,5 +10,19 @@ spring:
   profiles:
     include: common
 
-server:
-  port: 8091
+logging:
+  level:
+    com.creditqu.account_card_service: DEBUG
+
+account-card:
+  card:
+    expiry-years: 5
+    cvv-length: 3
+    pin-length: 6
+  virtual-account:
+    bank-codes:
+      - BNI
+      - MANDIRI
+      - BRI
+      - BCA
+    expiry-days: 30

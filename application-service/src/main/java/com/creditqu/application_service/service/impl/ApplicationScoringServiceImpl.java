@@ -5,6 +5,7 @@ import com.creditqu.application_service.dto.ScoringRequestDTO;
 import com.creditqu.application_service.dto.ScoringResponseDTO;
 import com.creditqu.application_service.entity.Application;
 import com.creditqu.application_service.repository.ApplicationRepository;
+import com.creditqu.application_service.service.ApplicationApprovalService;
 import com.creditqu.application_service.service.ApplicationScoringService;
 import com.creditqu.application_service.service.ApplicationService;
 import com.creditqu.common_module.constant.ApplicationStatus;
@@ -24,6 +25,7 @@ public class ApplicationScoringServiceImpl implements ApplicationScoringService 
     private final CreditScoringServiceClient scoringServiceClient;
     private final ApplicationRepository applicationRepository;
     private final ApplicationService applicationService;
+    private final ApplicationApprovalService applicationApprovalService;
 
     @Async
     @Transactional
@@ -61,6 +63,7 @@ public class ApplicationScoringServiceImpl implements ApplicationScoringService 
                         application.setApprovedLimit(scoringResponse.getLimitRecommendation());
                         applicationRepository.save(application);
                     }
+                    applicationApprovalService.processApproval(applicationId, scoringResponse);
                     break;
 
                 case "REJECT":

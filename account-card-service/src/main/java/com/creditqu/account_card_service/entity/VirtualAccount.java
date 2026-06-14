@@ -1,5 +1,6 @@
 package com.creditqu.account_card_service.entity;
 
+import com.creditqu.common_module.constant.VirtualAccountStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +32,10 @@ public class VirtualAccount {
     @Column(name = "bank_code", nullable = false, length = 10)
     private String bankCode;
 
-    @Column(name = "is_active")
-    private Boolean isActive = true;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @Builder.Default
+    private VirtualAccountStatus status = VirtualAccountStatus.ACTIVE;
 
     @Column(name = "expired_at")
     private LocalDateTime expiredAt;
